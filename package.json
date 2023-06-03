@@ -1,13 +1,14 @@
 {
-  "name": "knowledgehut-js-starter",
-  "version": "2.0.2",
-  "description": "A starter kit for building web applications by KnowledgeHut upGrad for the JavaScript and FullStack Programs",
+  "name": "Quiz Game",
+  "version": "0.1.0",
+  "description": "A static quiz game using vanila html, css, and javascript",
+  "type": "module",
   "scripts": {
     "dev": "npx vite serve --host",
     "build": "npx vite build --emptyOutDir",
     "preview": "npx vite preview --host"
   },
-  "author": "Sachin Bhatnagar <sachin@knowledgehut.co> (https://www.knowledgehut.com)",
+  "author": "Vu Nguyen",
   "license": "AFL-3.0",
   "devDependencies": {
     "msw": "^0.47.4",
