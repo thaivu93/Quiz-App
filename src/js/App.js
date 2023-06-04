@@ -9,7 +9,7 @@ export default class App {
     init() {
         const main = `
 			<h1>Trivial Game</h1>
-			<button class="game-start">Start Game</Button>`
+			<button class="btn game-start">Start Game</Button>`
         this.updateContent(main)
     }
 
@@ -29,7 +29,7 @@ export default class App {
 
         regisForm.addEventListener("submit", (evt) => {
             evt.preventDefault()
-
+            this.updateContent(`<h2>Select a topic to start your game</h2>`)
 			let questions;
 			fetch('../data/dataset.json')
 				.then((res) => res.json())
