@@ -50,7 +50,7 @@ export default class Game {
 			<form class="answer-form">
 				${questionGroup[this.currentQuestionIndex].options
 				.map(
-					(question) => `<input type="radio" name="answer" value="${question}" required> ${question} </br>`
+					(question) => `<input type="radio" class="" name="answer" value="${question}" required> ${question} </br>`
 				).join("")}				
 				<button class="btn prev-button">Prev</button>
 				<button class="btn" type="submit">Next</button>
