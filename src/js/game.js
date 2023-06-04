@@ -52,15 +52,19 @@ export default class Game {
 				.map(
 					(question) => `<input type="radio" name="answer" value="${question}" required> ${question} </br>`
 				).join("")}				
-				<button type="submit">Next</button>
+				<button class="btn prev-button">Prev</button>
+				<button class="btn" type="submit">Next</button>
 			</form>
 		`
 		// update page content with question list
         this.updateGameContent(questionList)
 
 		const answerForm = document.querySelector('.answer-form')
+		const prevBtn = document.querySelector('.prev-button')
 
 		answerForm.addEventListener('submit', this.checkAnswer.bind(this))
+		prevBtn.addEventListener('click', this.goesBack.bind(this) )
+		
     }
 
 	checkAnswer(event) {
@@ -80,6 +84,14 @@ export default class Game {
 			this.updateGameContent(`<h2>Select another topic to continue your game: </h2>`)
 			this.currentQuestionIndex = 0	
 			this.playGame()
+		}
+	}
+
+	goesBack() {
+		if (this.currentQuestionIndex > 0 && this.questionCount !== 1) {
+			this.questionCount--
+			this.currentQuestionIndex--
+			this.displayQuestions(this.questions[this.currentQuestionGroup])	
 		}
 	}
 
