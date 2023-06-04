@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Quiz Game</title>
+    </head>
+    <body>
+        <h1>Quiz Game</h1>
+        <div id="game-container">
+            <form id="start-form">
+                <label for="name">Enter your name:</label>
+                <input
+                    type="text"
+                    id="name"
+                />
+                <button type="submit">Start Game</button>
+            </form>
+        </div>
+
+        <script>
+            // Quiz questions
+            const questions = [
+                {
+                    question: "What is the capital of France?",
+                    options: ["Paris", "London", "Berlin", "Rome"],
+                    answer: "Paris",
+                },
+                {
+                    question: "Who painted the Mona Lisa?",
+                    options: [
+                        "Leonardo da Vinci",
+                        "Pablo Picasso",
+                        "Vincent van Gogh",
+                        "Michelangelo",
+                    ],
+                    answer: "Leonardo da Vinci",
+                },
+                // Add more questions here...
+            ]
+
+            // Game class
+            class Game {
+                constructor(name) {
+                    this.name = name
+                    this.score = 0
+                    this.currentQuestionIndex = 0
+                }
+
+                displayQuestion() {
+                    const questionContainer =
+                        document.getElementById("game-container")
+                    questionContainer.innerHTML = `
+          <h2>${questions[this.currentQuestionIndex].question}</h2>
+          <form id="answer-form">
+            ${questions[this.currentQuestionIndex].options
+                .map(
+                    (option) =>
+                        `<input type="radio" name="answer" value="${option}" required>${option}<br>`
+                )
+                .join("")}
+            <button type="submit">Submit Answer</button>
+          </form>
+        `
+                    document
+                        .getElementById("answer-form")
+                        .addEventListener("submit", this.checkAnswer.bind(this))
+                }
+
+                checkAnswer(event) {
+                    event.preventDefault()
+                    const selectedOption = document.querySelector(
+                        'input[name="answer"]:checked'
+                    ).value
+                    if (
+                        selectedOption ===
+                        questions[this.currentQuestionIndex].answer
+                    ) {
+                        this.score++
+                    }
+                    this.currentQuestionIndex++
+                    if (this.currentQuestionIndex < questions.length) {
+                        this.displayQuestion()
+                    } else {
+                        this.displayScore()
+                    }
+                }
+
+                displayScore() {
+                    const scoreContainer =
+                        document.getElementById("game-container")
+                    scoreContainer.innerHTML = `
+          <h2>Quiz completed!</h2>
+          <p>${this.name}, your score is ${this.score}/${questions.length}</p>
+          <button onclick="location.reload()">Play Again</button>
+        `
+                }
+            }
+
+            // Start the game when the form is submitted
+            document
+                .getElementById("start-form")
+                .addEventListener("submit", function (event) {
+                    event.preventDefault()
+                    const name = document.getElementById("name").value
+                    const game = new Game(name)
+                    game.displayQuestion()
+                })
+        </script>
+    </body>
+</html>
