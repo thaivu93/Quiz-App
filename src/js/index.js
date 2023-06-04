@@ -8,7 +8,9 @@ app.init()
 
 const btn = document.querySelector(".game-start")
 
-btn.addEventListener("click", () => {
+btn.addEventListener("click", (evt) => {
+    evt.preventDefault()
     app.updateState("registration")
     app.displayRegistration()
 })
+
